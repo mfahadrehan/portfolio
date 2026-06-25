@@ -317,12 +317,12 @@ h1.hero-name .line2{
   width:300px;height:300px;border-radius:50%;
   padding:3px;
   background:linear-gradient(135deg,var(--accent),var(--accent2),#ff6b6b);
-  animation:rotateBorder 6s linear infinite;
   box-shadow:0 0 60px rgba(0,212,255,0.2);
+  animation:ringPulse 4s ease-in-out infinite;
 }
-@keyframes rotateBorder{
-  from{filter:hue-rotate(0deg)}
-  to{filter:hue-rotate(360deg)}
+@keyframes ringPulse{
+  0%,100%{box-shadow:0 0 40px rgba(0,212,255,0.2)}
+  50%{box-shadow:0 0 80px rgba(0,212,255,0.4),0 0 40px rgba(124,58,237,0.3)}
 }
 .hero-photo-inner{
   width:100%;height:100%;border-radius:50%;
