@@ -132,9 +132,17 @@ body > nav.scrolled{
   background:transparent;border:1px solid var(--border2);
   color:var(--accent)!important;border-radius:6px;
   transition:all 0.2s!important;
+  text-decoration:none!important;
 }
-.nav-cta:hover{background:var(--accent)!important;color:var(--bg)!important}
-.nav-cta::after{display:none!important}
+.nav-cta:hover{
+  background:transparent!important;
+  border-color:var(--border2)!important;
+  color:var(--accent)!important;
+  box-shadow:none!important;
+  transform:none!important;
+  text-decoration:none!important;
+}
+.nav-cta::after,.nav-cta:hover::after{display:none!important;transform:none!important}
 
 /* hamburger */
 .nav-hamburger{
@@ -773,6 +781,15 @@ footer p span{color:var(--accent)}
   .skills-grid{grid-template-columns:1fr}
   .scroll-indicator{left:1.25rem}
 }
+/* ── TYPEWRITER CURSOR ── */
+.type-cursor{
+  display:inline-block;
+  color:var(--accent);
+  font-weight:300;
+  animation:blink 0.75s step-end infinite;
+  margin-left:1px;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 </style>
 </head>
 <body>
@@ -825,7 +842,7 @@ footer p span{color:var(--accent)}
   </h1>
 
   <p class="hero-role">
-    <strong>AI/ML Engineer</strong> · Full-Stack Developer · Python · Django · React<br>
+    I am a <strong style="color:var(--accent)"><span id="typewriter"></span><span class="type-cursor">|</span></strong><br>
     Building intelligent systems that bridge research and real-world impact.
   </p>
 
@@ -838,6 +855,9 @@ footer p span{color:var(--accent)}
     </div>
     <div class="mag-wrap">
       <a href="https://github.com/mfahadrehan" target="_blank" rel="noopener" class="btn-outline">GitHub ↗</a>
+    </div>
+    <div class="mag-wrap">
+      <a href="https://linkedin.com/in/mfahadrehan" target="_blank" rel="noopener" class="btn-outline">LinkedIn ↗</a>
     </div>
   </div>
 
@@ -1560,6 +1580,39 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}
   });
 });
+// ── TYPEWRITER ──
+(function(){
+  const el = document.getElementById('typewriter');
+  if(!el) return;
+  const words = ['Software Engineer', 'Full-Stack Developer', 'AI/ML Engineer'];
+  let wi = 0, ci = 0, deleting = false;
+  const TYPE_SPEED = 80, DELETE_SPEED = 45, PAUSE = 1800;
+
+  function tick(){
+    const word = words[wi];
+    if(deleting){
+      ci--;
+      el.textContent = word.slice(0, ci);
+      if(ci === 0){
+        deleting = false;
+        wi = (wi + 1) % words.length;
+        setTimeout(tick, 400);
+        return;
+      }
+      setTimeout(tick, DELETE_SPEED);
+    } else {
+      ci++;
+      el.textContent = word.slice(0, ci);
+      if(ci === word.length){
+        deleting = true;
+        setTimeout(tick, PAUSE);
+        return;
+      }
+      setTimeout(tick, TYPE_SPEED);
+    }
+  }
+  setTimeout(tick, 1000);
+})();
 </script>
 </body>
 </html>
