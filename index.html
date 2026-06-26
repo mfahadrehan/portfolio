@@ -250,11 +250,25 @@ body > nav.scrolled{
   width:8px;height:8px;border-radius:50%;
   background:var(--accent3);flex-shrink:0;
   box-shadow:0 0 6px var(--accent3);
-  animation:availPulse 2s ease-in-out infinite;
+  position:relative;
+  animation:dotBlink 1.4s ease-in-out infinite;
 }
-@keyframes availPulse{
-  0%,100%{box-shadow:0 0 4px var(--accent3),0 0 8px var(--accent3)}
-  50%{box-shadow:0 0 8px var(--accent3),0 0 18px var(--accent3),0 0 28px rgba(16,185,129,0.4)}
+.avail-dot::after{
+  content:'';
+  position:absolute;
+  inset:-4px;
+  border-radius:50%;
+  border:1.5px solid var(--accent3);
+  animation:dotRing 1.4s ease-out infinite;
+  opacity:0;
+}
+@keyframes dotBlink{
+  0%,100%{opacity:1}
+  50%{opacity:0.3}
+}
+@keyframes dotRing{
+  0%{transform:scale(1);opacity:0.8}
+  100%{transform:scale(2.6);opacity:0}
 }
 
 h1.hero-name{
